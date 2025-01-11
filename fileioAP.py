@@ -17,7 +17,12 @@ class TDlist:
     # read the text file into the list array
     def readFile(self):
         self.clearList()
-        file = open(self.filename, "r")
+        try:
+            file = open(self.filename, "r")
+        except FileNotFoundError:
+            file = open(self.filename, "x")
+            file.close()
+            file = open(self.filename, "r")
         line = file.readline()
         while line != "":
             self.list.append(line)
